@@ -1,0 +1,21 @@
+html,body {
+  height: 100%;
+}
+#map_wrapper {
+  height: 100%;
+}
+#map{
+  width: 100%;
+  height: 100%;
+}
+aside {
+  position: absolute;
+  overflow: auto;
+  top: 10px;
+  left: 0%;
+  padding: 40px;
+  padding-left: 10px;
+}
+.search-box {width: inherit;}
+.row {padding-top:1.5em;}
+   
