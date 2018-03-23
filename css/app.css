@@ -1,21 +1,33 @@
 html,body {
   height: 100%;
 }
+h1{
+	padding-top: 10px;
+	text-align: center;
+}
 #map_wrapper {
-  height: 100%;
+  height: 550px;
+  border: 1px solid black;
 }
 #map{
   width: 100%;
   height: 100%;
 }
-aside {
-  position: absolute;
-  overflow: auto;
-  top: 10px;
-  left: 0%;
-  padding: 40px;
-  padding-left: 10px;
+
+.search-box {
+	width: inherit;
+	text-align: center;
+	margin-bottom: 15px;
 }
-.search-box {width: inherit;}
 .row {padding-top:1.5em;}
    
+.choose{
+	padding: 10px;
+	
+	background-color: crimson;
+	color: white;
+}
+a{
+	text-decoration: none;
+	color: aliceblue;
+}

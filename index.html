@@ -8,16 +8,27 @@
       <link rel="stylesheet" href="css/app.css">
    </head>
    <body>
-      <div id="map_wrapper">
+	   <h1>Neighborhood Map</h1>
+	   <div class="container">
+       <div class="row">
+       <div class="col-lg-3	">
+            <input  class="search-box" value="" placeholder="Search…" type="search" name="filter" data-bind="textInput: query" > 
+		<div class=" choose">
+		 <h3>Choose one:</h3>
+            <ul data-bind="foreach: Results">
+              <li><a href="#"data-bind="text: title,click: $root.select"></a></li>
+            </ul>
+		   </div>
+		   </div>
+		   
+		    <div class="col-lg-9">
+	   <div id="map_wrapper">
          <div id="map" class="mapping"></div>
       </div>
-      <aside>
-		 <div class="container">
-         <div class="search-box">
-            <input id="submit" value="" placeholder="Search…" type="search" name="filter" data-bind="textInput: query" >     
-         </div>
-		</div>
-      </aside>
+		   </div>
+		   </div>
+	   </div>
+<hr>
       <div class="container">
          <div class="row">
             <div class="span4 offset 3">
@@ -43,6 +54,7 @@
       <script src="js/jquery-3.2.1.min.js"></script>
       <script src="js/knockout-3.4.2.js"></script>
       <script src="js/app.js"></script>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwP-_4kRCtzlITzu7Vp8EllkCukBtHSwM&v=3&callback=initMap"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwP-_4kRCtzlITzu7Vp8EllkCukBtHSwM&v=3&callback=initMap"
+		onerror="mapError()"></script>
    </body>
 </html>

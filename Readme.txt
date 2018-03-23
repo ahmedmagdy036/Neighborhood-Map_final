@@ -2,6 +2,7 @@
 dowload the index.html and open on the browser.
 
 ### setup and run the application
+we can get the app from githup (https://github.com/ahmedmagdy036/Neighborhood-Map_final)
 After dowload zip file and extract it ,then click the index.html and open it for any browser.
 first will apper a map of egypt and you filter the location by search  by name.
 second will apper weather api.you enter the country that you want to show the Temperature.

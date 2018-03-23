@@ -5,7 +5,7 @@ function initMap() {
 			lat: 30.035278,
 			lng: 31.231112
 		},
-		zoom: 8
+		zoom: 6
 	};
 
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -22,22 +22,43 @@ function initMap() {
 				animation: google.maps.Animation.DROP,
 
 			});
+			
 			location.marker = marker;
 			map.fitBounds(bounds);
 			google.maps.event.addListener(marker, 'click', Animation(marker, i));
 
 		}
-
+		
 		infoWindow = new google.maps.InfoWindow();
 		var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
-			this.setZoom(8);
+			this.setZoom(6);
 			google.maps.event.removeListener(boundsListener);
 		});
+		
 
 	}
 	Load_map = true;
-
+	
+	//function called whenclicked from the filtered list
+    self.select = function (marker, i) {
+		return function () {
+		 if (!Load_map) {
+            return;
+        }
+    	infoWindow.setContent(Content(markers[i]));
+		infoWindow.open(map, marker);
+		marker.setAnimation(google.maps.Animation.BOUNCE);
+		setTimeout(function() {
+            marker.setAnimation(null);
+        }, 1000);
+		viewModel.loadData(markers[i]);
+	};
+	
+};
+	
+	
 }
+
 // markers on the map 
 var markers = [{
 		title: "Alex",
@@ -64,12 +85,32 @@ var markers = [{
 		information: "is a city that lies in north east Egypt extending about 30 kilometres"
 	},
 	{
-		title: "El-Mansoura",
-		lat: 31.032955,
-		lng: 31.391224,
-		information: "is a city in Egypt, with a population of 960,423"
+		title: "Hurghada",
+		lat: 27.257778,
+		lng: 33.811667,
+		information: "Hurghada was once a fairly small and unimposing fishing village, located next to the Red Sea and boasting a number of superb beaches"
 	},
+    {
+		title: "Mersa Matruh",
+		lat: 31.350,
+		lng: 27.233,
+		information: "is a seaport in Egypt, the capital of the Matrouh Governorate. It is 240 km (150 mi) west of Alexandria and 222 km from Sallum, on the main highway from the Nile Delta to the Libyan border."
+	},
+	{
+		title: "Luxor",
+		lat: 25.69893,
+		lng: 32.6421,
+		information: "has frequently been characterized as the world's greatest open-air museum, as the ruins of the temple complexes at Karnak and Luxor stand within the modern city"
+	},
+    {
+		title: "Aswan",
+		lat: 24.09082,
+		lng: 32.89942,
+		information: "Aswan is a busy market and tourist centre located just north of the Aswan Dams on the east bank of the Nile at the first cataract. "
+	},
+			   
 ];
+
 
 //function to show the title and information 
 function Content(location) {
@@ -79,15 +120,24 @@ function Content(location) {
 var map;
 var Load_map = false;
 
+
 //Animationfunction
-function Animation(marker, i) {
+this.Animation = function(marker, i) {
 	return function () {
-		infoWindow.setContent(Content(markers[i]));
+		 if (!Load_map) {
+            return;
+        }
+    	infoWindow.setContent(Content(markers[i]));
 		infoWindow.open(map, marker);
 		marker.setAnimation(google.maps.Animation.BOUNCE);
+		setTimeout(function() {
+            marker.setAnimation(null);
+        }, 1000);
 		viewModel.loadData(markers[i]);
 	};
 }
+
+
 
 //filter the marker
 var ViewModel = function () {
@@ -114,10 +164,23 @@ var ViewModel = function () {
 		}
 		return filteredmarkers;
 	});
-};
+	self.loadData = function(location) {
+		return location;
+    };
+	
+	
+	 
+	};
+
+
+
+
 var viewModel = new ViewModel();
 ko.applyBindings(viewModel);
 
+function mapError() {
+    alert("Google Maps has failed to load");
+}
 
 //secand api weather
 var openWeatherAppId = '6bc64b20e18af1e2c81480152e4b9289',
